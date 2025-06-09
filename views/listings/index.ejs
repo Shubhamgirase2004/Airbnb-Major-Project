@@ -1,0 +1,131 @@
+<% layout("/layouts/boilerplate")%>
+
+<style>
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    cursor: pointer;
+    color: blue;
+  }
+  
+  .tax-info {
+    display: none;
+  }
+
+  .tax-switch {
+    border: 1px solid black;
+    border-radius:  1rem;
+    height: 3rem;
+    padding: 1rem;
+    margin-left: 5rem;
+    align-items: center;
+    display: flex;
+  }
+</style>
+
+<div id="filters">
+  <div class="filter"><p>Pune</p></div>
+  <div class="filter"><p>Mumbai</p></div>
+  <div class="filter"><p>Delhi</p></div>
+  <div class="filter"><p>Bangalore</p></div>
+  <div class="filter"><p>Chennai</p></div>
+  <div class="filter"><p>Surat</p></div>
+  <div class="filter"><p>Nashik</p></div>
+  <div class="filter"><p>Kolkata</p></div>
+  <div class="tax-switch">
+    <div class="form-check-reverse form-switch">
+      <input 
+          class="form-check-input" 
+          type="checkbox" 
+          role="switch" 
+          id="flexSwitchCheckDefault">
+      <label 
+          class="form-check-label" 
+          for="flexSwitchCheckDefault">Display Taxes
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- Listings container for JS rendering -->
+<div id="listings-container" class="row row-cols-lg-3 row-cols-md-3 mt-3 row-cols-sm-1"></div>
+
+<!-- Expose all listings to JS -->
+<script>
+  const allListingsData = <%- JSON.stringify(allListings) %>;
+</script>
+
+<script>
+  // Tax switch logic
+  let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+  function toggleTaxInfo() {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for (let info of taxInfo) {
+      if(info.style.display != "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }     
+    }
+  }
+  taxSwitch.addEventListener("click", toggleTaxInfo);
+
+  // Filtering logic
+  const filters = document.querySelectorAll('.filter');
+  const listingsContainer = document.getElementById('listings-container');
+
+  function renderListings(listings) {
+    listingsContainer.innerHTML = '';
+    listings.forEach(listing => {
+      listingsContainer.innerHTML += `
+        <a href="/listings/${listing._id}" class="listing-link"> 
+          <div class="card col listing-card">
+            <img 
+              class="card-img-top" 
+              src="${listing.image.url}" 
+              alt="listing_image" 
+              style="height: 20rem" />
+            <div class="card-img-overlay"> <i><b><u> </u></b></i></div>
+            <div class="card-body">
+              <p class="card-text">
+                <b>${listing.title}</b> <br>
+                &#8377; ${listing.price} /Night
+                <i class="tax-info">&nbsp;+18% GST</i>
+              </p>
+            </div>
+          </div>
+        </a>
+      `;
+    });
+    // Re-attach tax switch logic for new listings
+    if (taxSwitch.checked) {
+      let taxInfo = document.getElementsByClassName("tax-info");
+      for (let info of taxInfo) {
+        info.style.display = "inline";
+      }
+    }
+  }
+
+  filters.forEach(filter => {
+    filter.addEventListener('click', function() {
+      const city = this.innerText.trim().toLowerCase();
+      const filtered = allListingsData.filter(listing => listing.location.toLowerCase() === city);
+      renderListings(filtered);
+    });
+  });
+
+  // Show all listings on page load
+  renderListings(allListingsData);
+</script>

@@ -1,0 +1,178 @@
+body{
+    font-family: "Plus  Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+   
+}
+
+.container {
+    flex: 1;
+}
+
+.navbar {
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass{
+    color:#fe424d;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222 !important;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links ,
+.f-info-socials ,
+.f-info-brand {
+    width: 100%;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+
+.f-info-socials i {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem
+}
+
+.f-info {
+    text-align: center ;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+.f-info-brand {
+    color: black;
+    text-decoration: none;
+}
+
+/* //cards// */
+
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+
+}
+
+.card-img-top{
+    border-radius: 1rem;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body{
+    padding: 0 !important;
+
+}
+
+.card-text{
+    font-weight: 400 !important;
+}
+
+.listing-link {
+    text-decoration: none !important;
+}
+
+/* card effect */
+
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity:0.2;
+    background-color: white;
+}
+
+.add-btn {
+    background-color:#fe424d !important;
+    border: none !important;
+}
+
+/* Edit page  */
+
+.edit-btn {
+    background-color:#fe424d !important;
+    border: none !important;
+}
+
+/* show page */
+
+.show-img {
+    height: 20rem;
+    object-fit: contain;
+    border-radius: 1rem;
+}
+
+.btns {
+    display: flex;
+}
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+
+}
+
+.star-rating {
+  direction: rtl;
+  display: inline-flex;
+  gap: 5px;
+}
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  cursor: pointer;
+  font-size: 1.8rem;
+  color: #ccc;
+  transition: color 0.2s;
+}
+
+.star-rating input[type="radio"]:checked ~ label i,
+.star-rating label:hover ~ label i,
+.star-rating label:hover i {
+  color: gold;
+}
+
+.profile-icon {
+    width: 3rem !important;
+    height: 3rem  !important;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+/* map styling  */
+
+#map {
+    height: 30rem;
+    width: 100%;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+
+}
+
